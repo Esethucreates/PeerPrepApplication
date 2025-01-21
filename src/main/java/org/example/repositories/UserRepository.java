@@ -25,6 +25,7 @@ public class UserRepository {
                     var qualification = resultSet.getString("qualification");
                     var statusReturned = resultSet.getString("userStatus");
                     var campusID = resultSet.getInt("campusID");
+//                    TODO: Remove returning the password
                     users.add(new UserModel(userID, fullName, email, password, qualification, statusReturned, campusID));
                 }
                 return users;
@@ -36,13 +37,15 @@ public class UserRepository {
     @Contract("_, _, _, _, _, _ -> new")
     public static UserModel createUser(String fullName, String email,
                                        String password_hash, String qualification,
-                                       String userStatus, int campus) throws Exception{
+                                       String userStatus, int campus) throws Exception {
         var query = "INSERT INTO (fullName, email, password_hash, qualification, userStatus, campus) INTO (?, ?, ?, ?, ?, ?) RETURNING*";
 
         try (var connection = DB.connection();
         var statement = connection.prepareStatement(query);){
             statement.setString(1, fullName);
             statement.setString(2, email);
+//            TODO: hash the password before you insert it
+
             statement.setString(3, password_hash);
             statement.setString(4, qualification);
             statement.setString(5, userStatus);
@@ -51,6 +54,7 @@ public class UserRepository {
             try (var resultSet = statement.executeQuery();){
                 resultSet.next();
                 var id = resultSet.getInt("userID");
+//                TODO: Do not return the password
                 return new UserModel(id, fullName, email, password_hash, qualification, userStatus, campus);
             }
         }
