@@ -6,7 +6,6 @@ import org.example.repositories.UserRepository;
 
 public class HandleUserCreationForm {
     public static void handleUserCreation(Context ctx) throws Exception {
-        // TODO: handle user registration
 //        Validate the form param
         String fullName = ctx.formParamAsClass("fullName", String.class).get();
         String email = ctx.formParamAsClass("email", String.class).get();
