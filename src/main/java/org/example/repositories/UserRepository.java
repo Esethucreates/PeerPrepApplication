@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserRepository {
+
     @NotNull
     public static List<UserModel> returnUsers(String userStatus) throws Exception {
         var query = "SELECT * FROM users WHERE userStatus = ?";
@@ -38,20 +39,23 @@ public class UserRepository {
     public static UserModel createUser(String fullName, String email,
                                        String password_hash, String qualification,
                                        String userStatus, int campus) throws Exception {
-        var query = "INSERT INTO (fullName, email, password_hash, qualification, userStatus, campus) INTO (?, ?, ?, ?, ?, ?) RETURNING*";
+        var createUserQuery = "INSERT INTO users(fullName, email, password_hash, qualification, userStatus, campusID) VALUES (?, ?, ?, ?, ?, ?);";
 
         try (var connection = DB.connection();
-        var statement = connection.prepareStatement(query);){
-            statement.setString(1, fullName);
-            statement.setString(2, email);
-//            TODO: hash the password before you insert it
+        var statementCreateUser = connection.prepareStatement(createUserQuery);){
+            statementCreateUser.setString(1, fullName);
+            statementCreateUser.setString(2, email);
+            statementCreateUser.setString(3, password_hash);
+            statementCreateUser.setString(4, qualification);
+            statementCreateUser.setString(5, userStatus);
+            statementCreateUser.setInt(6, campus);
+            statementCreateUser.executeUpdate();
+            var returnUserQuery = "SELECT * FROM users " +
+                    "ORDER BY userID DESC " +
+                    "LIMIT 1";
 
-            statement.setString(3, password_hash);
-            statement.setString(4, qualification);
-            statement.setString(5, userStatus);
-            statement.setInt(6, campus);
-
-            try (var resultSet = statement.executeQuery();){
+            try ( var statementReturnLast = connection.prepareStatement(returnUserQuery);
+            var resultSet = statementReturnLast.executeQuery();){
                 resultSet.next();
                 var id = resultSet.getInt("userID");
 //                TODO: Do not return the password
