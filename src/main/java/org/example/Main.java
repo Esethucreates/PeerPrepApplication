@@ -3,6 +3,7 @@ package org.example;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
+import org.example.controllers.HandleUserCreationForm;
 import org.example.controllers.SignUpController;
 import org.example.controllers.UserController;
 import org.example.utilities.RenderEngine;
@@ -17,7 +18,8 @@ public class Main {
         }).start(1001);
         app.get("/", ctx -> ctx.render("/index.html"));
         app.get("/signup", SignUpController::renderSignup);
-
+        app.post("/handleCreation", HandleUserCreationForm::handleUserCreation);
+        app.get("/dashboard", ctx -> ctx.render("/dashboard.html"));
     }
 
 
