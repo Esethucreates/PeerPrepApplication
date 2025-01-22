@@ -1,187 +1,196 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Sign Up - PeerPrep</title>
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.4.19/full.min.css"
-      rel="stylesheet"
-      type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.4.19/full.min.css"
+            rel="stylesheet"
+            type="text/css"
     />
     <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
-      rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+            rel="stylesheet"
     />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <div class="navbar bg-base-100 shadow-lg">
-      <div class="flex-1">
+</head>
+<body>
+<!-- Navbar -->
+<div class="navbar bg-base-100 shadow-lg">
+    <div class="flex-1">
         <a href="/" class="btn btn-ghost normal-case text-xl">PeerPrep</a>
-      </div>
-      <div class="flex-none">
-        <a href="/login" class="btn btn-ghost">Login</a>
-      </div>
     </div>
+    <div class="flex-none">
+        <a href="/login" class="btn btn-ghost">Login</a>
+    </div>
+</div>
 
-    <div class="min-h-screen bg-base-200 py-8">
-      <div class="max-w-md mx-auto">
+<div class="min-h-screen bg-base-200 py-8">
+    <div class="max-w-md mx-auto">
         <!-- Card Container -->
         <div class="card bg-base-100 shadow-xl">
-          <div class="card-body">
-            <h2 class="card-title text-2xl font-bold text-center mb-2">
-              Create Account
-            </h2>
-            <p class="text-center text-base-content/60 mb-6">
-              Join our community of learners and educators
-            </p>
-
-            <!-- Sign Up Form -->
-            <form>
-              <!-- Full Name -->
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Full Name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your full name"
-                  class="input input-bordered"
-                  required
-                />
-              </div>
-
-              <!-- Email -->
-              <div class="form-control mt-4">
-                <label class="label">
-                  <span class="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="your.email@example.com"
-                  class="input input-bordered"
-                  required
-                />
-              </div>
-
-              <!-- Password -->
-              <div class="form-control mt-4">
-                <label class="label">
-                  <span class="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Create a strong password"
-                  class="input input-bordered"
-                  required
-                />
-                <label class="label">
-                  <span class="label-text-alt text-base-content/60"
-                    >Must be at least 8 characters</span
-                  >
-                </label>
-              </div>
-
-              <!-- Campus Selection -->
-              <div class="form-control mt-4">
-                <label for="campus" class="label">
-                  <span class="label-text">Campus</span>
-                </label>
-                <select
-                  name="campus"
-                  id="campus"
-                  class="select select-bordered w-full"
-                >
-                  <option disabled selected>Select your campus</option>
-                  <option th:each="campus : ${campusList}" th:text="${campus.campusName}">MIT</option>
-                </select>
-              </div>
-
-              <div>
-                <div class="form-control mt-4">
-                  <label for="subject" class="label">
-                    <span class="label-text">Modules</span>
-                  </label>
-                  <select
-
-                    name="subject"
-                    class="select select-bordered w-full"
-                    id="subject"
-                  >
-                  <option th:each=" subject : ${subjectList}" th:text="${subject.getSubject_name}"></option>
-                  </select>
-
-                  <label for="status" class="label">
-                    <span class="label-text">Student or Teacher</span>
-                  </label>
-                  <select
-                    name="status"
-                    id="status"
-                    class="select select-bordered w-full"
-                    multiple
-                  >
-                    <option value="Student">Student</option>
-                    <option value="Tutor">Tutor</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Terms and Conditions -->
-              <div class="form-control mt-6">
-                <label class="label cursor-pointer">
-                  <span class="label-text"
-                    >I agree to the Terms of Service and Privacy Policy</span
-                  >
-                  <input
-                    type="checkbox"
-                    class="checkbox checkbox-primary"
-                    required
-                  />
-                </label>
-              </div>
-
-              <!-- Submit Button -->
-              <div class="form-control mt-6">
-                <button class="btn btn-primary">Create Account</button>
-              </div>
-
-              <!-- Sign In Link -->
-              <div class="text-center mt-6">
-                <p class="text-base-content/60">
-                  Already have an account?
-                  <a href="/login" class="link link-primary">Sign in</a>
+            <div class="card-body">
+                <h2 class="card-title text-2xl font-bold text-center mb-2">
+                    Create Account
+                </h2>
+                <p class="text-center text-base-content/60 mb-6">
+                    Join our community of learners and educators
                 </p>
-              </div>
-            </form>
-          </div>
+<!--                The name attribute of the inputs determines the key once the form data is parsed on the server. This-->
+                <!--     form would result in keys of userId and content.-->
+                <!-- Sign Up Form -->
+                <!-- TODO: Fix the handler for post method                -->
+                <form action="/handleCreation" th:action="@{/handleCreation}" method="post">
+                    <!-- Full Name -->
+                    <div class="form-control">
+                        <label for="name" class="label">
+                            <span class="label-text">Full Name</span>
+                        </label>
+                        <input
+                                id="name"
+                                name="fullName"
+                                type="text"
+                                placeholder="Enter your full name"
+                                class="input input-bordered"
+                                required
+                        />
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-control mt-4">
+                        <label for="email" class="label">
+                            <span class="label-text">Email</span>
+                        </label>
+                        <input
+                                type="email"
+                                name="email"
+                                placeholder="your.email@example.com"
+                                class="input input-bordered"
+                                id="email"
+                                required
+                        />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-control mt-4">
+                        <label for="password" class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input
+                                id="password"
+                                name="password"
+                                type="password"
+                                placeholder="Create a strong password"
+                                class="input input-bordered"
+                                required
+                        />
+                        <label class="label">
+                  <span class="label-text-alt text-base-content/60"
+                  >Must be at least 8 characters</span
+                  >
+                        </label>
+                    </div>
+                    <div>
+                        <!--Campus-->
+                        <div class="form-control mt-4">
+                            <label for="campus" class="label">
+                                <span class="label-text">Campus</span>
+                            </label>
+                            <select
+                                    name="campus"
+                                    id="campus"
+                                    class="select select-bordered w-full"
+                            >
+                                <option disabled selected>Select your campus</option>
+                                <option th:each="campus : ${campusList}" th:text="${campus.campusName}"
+                                        th:value="${campus.campusID}">default
+                                </option>
+                            </select>
+                            <!--Modules-->
+                            <label for="subject" class="label">
+                                <span class="label-text">Modules</span>
+                            </label>
+                            <select
+
+                                    name="subject"
+                                    class="select select-bordered w-full"
+                                    id="subject"
+                            >
+                                <option disabled selected>Select your Module</option>
+                                <option th:each=" subject : ${subjectList}"
+                                        th:text="${subject.subject_name}"
+                                        th:value="${subject.subject_name}"></option>
+                            </select>
+                            <!--Status selection-->
+                            <label for="status" class="label">
+                                <span class="label-text">Student or Tutor</span>
+                            </label>
+                            <select
+                                    name="status"
+                                    id="status"
+                                    class="select select-bordered w-full"
+                            >
+                                <option value="Student">Student</option>
+                                <option value="Tutor">Tutor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-control mt-6">
+                        <label class="label cursor-pointer">
+                  <span class="label-text"
+                  >I agree to the Terms of Service and Privacy Policy</span
+                  >
+                            <input
+                                    type="checkbox"
+                                    class="checkbox checkbox-primary"
+                                    required
+                            />
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-control mt-6">
+                        <button class="btn btn-primary">Create Account</button>
+                    </div>
+
+                    <!-- Sign In Link -->
+                    <div class="text-center mt-6">
+                        <p class="text-base-content/60">
+                            Already have an account?
+                            <a href="/login" class="link link-primary">Sign in</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <!-- Additional Information -->
         <div class="mt-8 text-center space-y-4">
-          <div class="stats shadow">
-            <div class="stat place-items-center">
-              <div class="stat-title">Active Tutors</div>
-              <div class="stat-value">500+</div>
+            <div class="stats shadow">
+                <div class="stat place-items-center">
+                    <div class="stat-title">Active Tutors</div>
+                    <div class="stat-value">500+</div>
+                </div>
+                <div class="stat place-items-center">
+                    <div class="stat-title">Students</div>
+                    <div class="stat-value">2,000+</div>
+                </div>
+                <div class="stat place-items-center">
+                    <div class="stat-title">Sessions</div>
+                    <div class="stat-value">10k+</div>
+                </div>
             </div>
-            <div class="stat place-items-center">
-              <div class="stat-title">Students</div>
-              <div class="stat-value">2,000+</div>
-            </div>
-            <div class="stat place-items-center">
-              <div class="stat-title">Sessions</div>
-              <div class="stat-value">10k+</div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
+</div>
 
-    <!-- Footer -->
-    <footer class="footer footer-center p-4 bg-base-100 text-base-content">
-      <div>
+<!-- Footer -->
+<footer class="footer footer-center p-4 bg-base-100 text-base-content">
+    <div>
         <p>Copyright © 2025 - All rights reserved by PeerPrep</p>
-      </div>
-    </footer>
-  </body>
+    </div>
+</footer>
+</body>
 </html>
