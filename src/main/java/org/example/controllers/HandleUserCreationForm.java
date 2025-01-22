@@ -28,7 +28,7 @@ public class HandleUserCreationForm {
         ctx.redirect("/dashboard");
 //      TODO: Create a login page
 //       TODO: Create a handler that will identify if the same email has been used
-//        TODO: Create a habdler for login system
+//        TODO: Create a handler for login system
 
     }
 
