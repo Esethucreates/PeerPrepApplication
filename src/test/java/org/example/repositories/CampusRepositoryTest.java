@@ -1,6 +1,5 @@
 package org.example.repositories;
 
-import org.example.models.CampusModel;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
