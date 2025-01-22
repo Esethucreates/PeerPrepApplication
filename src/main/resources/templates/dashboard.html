@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerPrep - Find Your Tutor</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/daisyui/4.4.19/full.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-lg sticky top-0 z-50">
+        <div class="navbar-start">
+            <a class="btn btn-ghost normal-case text-xl">PeerPrep</a>
+        </div>
+        
+        <div class="navbar-center hidden lg:flex">
+            <input type="text" placeholder="Search tutors or subjects..." class="input input-bordered w-96" />
+        </div>
+
+        <div class="navbar-end">
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img src="/api/placeholder/40/40" alt="profile" />
+                    </div>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Profile</a></li>
+                    <li><a>My Sessions</a></li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="drawer lg:drawer-open">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content p-6">
+            <!-- Search Filters -->
+            <div class="flex flex-wrap gap-4 mb-6">
+                <div class="join">
+                    <div class="join-item">
+                        <select class="select select-bordered">
+                            <option disabled selected>Subject</option>
+                            <option>Mathematics</option>
+                            <option>Physics</option>
+                            <option>Chemistry</option>
+                            <option>Computer Science</option>
+                        </select>
+                    </div>
+                    <div class="join-item">
+                        <select class="select select-bordered">
+                            <option disabled selected>Campus</option>
+                            <option>MIT</option>
+                            <option>Stanford</option>
+                            <option>Harvard</option>
+                            <option>Yale</option>
+                        </select>
+                    </div>
+                    <div class="join-item">
+                        <select class="select select-bordered">
+                            <option disabled selected>Price Range</option>
+                            <option>$10-20/hr</option>
+                            <option>$20-30/hr</option>
+                            <option>$30-40/hr</option>
+                            <option>$40+/hr</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary">Apply Filters</button>
+            </div>
+
+            <!-- Tutors Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tutor Card 1 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <figure class="px-10 pt-10">
+                        <div class="avatar">
+                            <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src="/api/placeholder/100/100" alt="tutor" />
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title">Dr. Sarah Johnson</h2>
+                        <div class="badge badge-primary">Mathematics</div>
+                        <div class="rating rating-sm">
+                            <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                        </div>
+                        <p>PhD in Mathematics</p>
+                        <p class="text-primary font-bold">$30/hour</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary">Book Session</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutor Card 2 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <figure class="px-10 pt-10">
+                        <div class="avatar">
+                            <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src="/api/placeholder/100/100" alt="tutor" />
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title">Prof. Michael Chen</h2>
+                        <div class="badge badge-primary">Physics</div>
+                        <div class="rating rating-sm">
+                            <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                        </div>
+                        <p>Master in Physics</p>
+                        <p class="text-primary font-bold">$25/hour</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary">Book Session</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tutor Card 3 -->
+                <div class="card bg-base-100 shadow-xl">
+                    <figure class="px-10 pt-10">
+                        <div class="avatar">
+                            <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src="/api/placeholder/100/100" alt="tutor" />
+                            </div>
+                        </div>
+                    </figure>
+                    <div class="card-body items-center text-center">
+                        <h2 class="card-title">James Wilson</h2>
+                        <div class="badge badge-primary">Chemistry</div>
+                        <div class="rating rating-sm">
+                            <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" checked />
+                            <input type="radio" name="rating-3" class="mask mask-star-2 bg-orange-400" />
+                        </div>
+                        <p>PhD in Chemistry</p>
+                        <p class="text-primary font-bold">$35/hour</p>
+                        <div class="card-actions">
+                            <button class="btn btn-primary">Book Session</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-8">
+                <div class="join">
+                    <button class="join-item btn">«</button>
+                    <button class="join-item btn btn-active">1</button>
+                    <button class="join-item btn">2</button>
+                    <button class="join-item btn">3</button>
+                    <button class="join-item btn">4</button>
+                    <button class="join-item btn">»</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="drawer-side">
+            <label for="my-drawer-2" class="drawer-overlay"></label> 
+            <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                <li class="menu-title">Navigation</li>
+                <li><a class="active">Find Tutors</a></li>
+                <li><a>My Sessions</a></li>
+                <li><a>Messages</a></li>
+                <li><a>Calendar</a></li>
+
+                <li class="menu-title mt-4">Quick Filters</li>
+                <li>
+                    <details class="collapse bg-base-100">
+                        <summary class="collapse-title">Subjects</summary>
+                        <div class="collapse-content">
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Mathematics</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Physics</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Chemistry</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </div>
+                    </details>
+                </li>
+
+                <li>
+                    <details class="collapse bg-base-100">
+                        <summary class="collapse-title">Availability</summary>
+                        <div class="collapse-content">
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Morning</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Afternoon</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                            <label class="label cursor-pointer">
+                                <span class="label-text">Evening</span> 
+                                <input type="checkbox" class="checkbox" />
+                            </label>
+                        </div>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
