@@ -33,7 +33,35 @@ public class UserRepository {
             }
         }
     }
-// Creating a user
+
+    //    return user by email and password match
+    public static UserModel returnUserByEmailPassword(String email, String password) throws Exception {
+        String query = "SELECT * FROM users " +
+                " WHERE email = ? AND password_hash = ?; ";
+
+        try (var connection = DB.connection();
+             var statement = connection.prepareStatement(query);) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            try (var resultSet = statement.executeQuery();) {
+                resultSet.next();
+                var id = resultSet.getInt("userID");
+                var fullName = resultSet.getString("fullName");
+                var emailSet = resultSet.getString("email");
+                var password_hash = resultSet.getString("password_hash");
+                var qualification = resultSet.getString("qualification");
+                var userStatus = resultSet.getString("userStatus");
+                var campusID = resultSet.getInt("campusID");
+
+                return new UserModel(id, fullName, emailSet, password_hash, qualification, userStatus, campusID);
+
+            }
+        }
+    }
+
+
+    // Creating a user
     @NotNull
     @Contract("_, _, _, _, _, _ -> new")
     public static UserModel createUser(String fullName, String email,
@@ -42,7 +70,7 @@ public class UserRepository {
         var createUserQuery = "INSERT INTO users(fullName, email, password_hash, qualification, userStatus, campusID) VALUES (?, ?, ?, ?, ?, ?);";
 
         try (var connection = DB.connection();
-        var statementCreateUser = connection.prepareStatement(createUserQuery);){
+             var statementCreateUser = connection.prepareStatement(createUserQuery);) {
             statementCreateUser.setString(1, fullName);
             statementCreateUser.setString(2, email);
             statementCreateUser.setString(3, password_hash);
@@ -54,11 +82,10 @@ public class UserRepository {
                     "ORDER BY userID DESC " +
                     "LIMIT 1";
 
-            try ( var statementReturnLast = connection.prepareStatement(returnUserQuery);
-            var resultSet = statementReturnLast.executeQuery();){
+            try (var statementReturnLast = connection.prepareStatement(returnUserQuery);
+                 var resultSet = statementReturnLast.executeQuery();) {
                 resultSet.next();
                 var id = resultSet.getInt("userID");
-//                TODO: Do not return the password
                 return new UserModel(id, fullName, email, password_hash, qualification, userStatus, campus);
             }
         }
